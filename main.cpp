@@ -15,12 +15,16 @@
 void choixPoids(graphe g, Svgfile& svgout);
 //graphe g{"broadway.txt","broadway_weights_0.txt"};
 
+
 void menu()
 {
     std::cout<<std::endl;
     std::cout<<"1: Afficher les graphes"<<std::endl;
     std::cout<<"2: Afficher le graphe prim"<<std::endl;
-    std::cout<<"3: Quitter"<<std::endl;
+    std::cout<<"3: Afficher les solutions"<<std::endl;
+    std::cout<<"4: Quitter"<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<std::endl;
 }
 
 int faireChoix()
@@ -29,9 +33,11 @@ int faireChoix()
     do
     {
         std::cout<<"Faites votre choix:"<<std::endl;
+        std::cout<<std::endl;
         std::cin>>choisir;
+        std::cout<<std::endl;
     }
-    while(choisir <0 || choisir >4);
+    while(choisir <0 || choisir >5);
     return choisir;
 }
 
@@ -48,6 +54,7 @@ void menuPoids()
     std::cout<<"1= poids1"<<std::endl;
     std::cout<<"2= poids1"<<std::endl;
     std::cout<<"3= Retour"<<std::endl;
+    std::cout<<std::endl;
 }
 
 
@@ -71,11 +78,15 @@ void appelerMenu(graphe g, Svgfile& svgout)
                     choixPoids(g, svgout);
                     break;
                 case 3:
+                    g.remplir_vector();
+                    appelerMenu(g, svgout);
+                    break;
+                case 4:
                     quittercode();
                     break;
             }
     }
-    while (choisir <0 || choisir >4) ;
+    while (choisir <0 || choisir >5) ;
     
 }
 
@@ -102,7 +113,7 @@ void choixPoids(graphe g, Svgfile& svgout)
                 appelerMenu(g, svgout);
         }
     }
-    while (choisir <0 || choisir >4);
+    while (choisir <0 || choisir >5);
     }
 
 
@@ -113,7 +124,7 @@ int main(int argc, const char * argv[]) {
     graphe g{"broadway.txt","broadway_weights_0.txt"};
     //g.afficher();
     g.dessiner_graphe(svgout);
-    g.remplir_vector();
+    //g.remplir_vector();
     //g.prim(1, svgout);
     appelerMenu(g, svgout);
     return 0;

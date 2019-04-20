@@ -134,7 +134,9 @@ void graphe::prim(double poids, Svgfile& svgout)const{
            
         }
     }
+    std::cout<<std::endl;
     std::cout << SomArete.size();
+    std::cout<<std::endl;
     // On affiche toutes les arêtes marquées
     for (int j=0; j<SomArete.size(); j++)
     {
@@ -217,6 +219,10 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
 {
     std::vector<std::vector<bool>> test;
     std::vector<bool> test2;
+    
+    
+    
+    //
     /*
      std::vector<int> possibilite;
      std::vector<std::vector<int>>vecdec;
@@ -243,8 +249,10 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
      
      }
      while(std::next_permutation(possibilite.begin()),possibilite.end());
-     
      */
+     
+    
+    //
     
     std::sort(vb.begin(), vb.end());
     do
@@ -254,8 +262,10 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
     }
     while(std::next_permutation(vb.begin(),vb.end()));
     
-    /*
-     
+    
+    
+    //
+     /*
      for(size_t i=0; i< m_arete.size(); i++)
      {
      for(size_t j=0; j< m_sommets.size(); j++)
@@ -265,9 +275,10 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
      }
      test.push_back(vb);
      }
+    */
+    
      
      
-     */
     for(size_t i=0; i< test.size(); i++)
     {
         for(size_t j=0; j< vb.size(); j++)
@@ -287,8 +298,8 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
 
 void graphe::remplir_vector()
 {
-    size_t taille = m_arete.size();
-    int nb_combinaisons = pow(2,taille);
+    //size_t taille = m_arete.size();
+    //int nb_combinaisons = pow(2,taille);
     std::vector<bool> combi_arete (m_sommets.size()-1, 1);
     
     for(size_t i = 0; i < m_arete.size()-m_sommets.size()+1; ++i)
