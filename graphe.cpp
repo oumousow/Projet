@@ -145,14 +145,14 @@ void graphe::prim(double poids, Svgfile& svgout)const{
         
         
         
-        svgout.addDisk(m_sommets.find(SomArete[j]->getSommet1())->second->get_x()+600,m_sommets.find(SomArete[j]->getSommet1())->second->get_y(),5,"black");
-        svgout.addText(m_sommets.find(SomArete[j]->getSommet1())->second->get_x()+615, m_sommets.find(SomArete[j]->getSommet1())->second->get_y(),SomArete[j]->getSommet1(), "purple");
-        svgout.addDisk(m_sommets.find(SomArete[j]->getSommet2())->second->get_x()+600,m_sommets.find(SomArete[j]->getSommet2())->second->get_y(),5,"black");
-        svgout.addText(m_sommets.find(SomArete[j]->getSommet2())->second->get_x()+615, m_sommets.find(SomArete[j]->getSommet2())->second->get_y(),SomArete[j]->getSommet2(), "purple");
+        svgout.addDisk(m_sommets.find(SomArete[j]->getSommet1())->second->get_x()+500,m_sommets.find(SomArete[j]->getSommet1())->second->get_y(),5,"black");
+        svgout.addText(m_sommets.find(SomArete[j]->getSommet1())->second->get_x()+515, m_sommets.find(SomArete[j]->getSommet1())->second->get_y(),SomArete[j]->getSommet1(), "purple");
+        svgout.addDisk(m_sommets.find(SomArete[j]->getSommet2())->second->get_x()+500,m_sommets.find(SomArete[j]->getSommet2())->second->get_y(),5,"black");
+        svgout.addText(m_sommets.find(SomArete[j]->getSommet2())->second->get_x()+515, m_sommets.find(SomArete[j]->getSommet2())->second->get_y(),SomArete[j]->getSommet2(), "purple");
         
-        svgout.addLine(m_sommets.find(SomArete[j]->getSommet1())->second->get_x() + 600, m_sommets.find(SomArete[j]->getSommet1())->second->get_y(), m_sommets.find(SomArete[j]->getSommet2())->second->get_x() + 600, m_sommets.find(SomArete[j]->getSommet2())->second->get_y(), "black");
+        svgout.addLine(m_sommets.find(SomArete[j]->getSommet1())->second->get_x() + 500, m_sommets.find(SomArete[j]->getSommet1())->second->get_y(), m_sommets.find(SomArete[j]->getSommet2())->second->get_x() + 500, m_sommets.find(SomArete[j]->getSommet2())->second->get_y(), "black");
         //svgout.addLine((m_sommets.find(SomArete[j]->getSommet1())->second->get_x() + 600, m_sommets.find(SomArete[j]->getSommet1())->second->get_y(),m_sommets.find((SomArete[j]->getSommet2())->second->get_x() + 600, m_sommets.find(SomArete[j]->getSommet2())->second->get_y(), "black");
-        svgout.addText((m_sommets.find(SomArete[j]->getSommet1())->second->get_x() + 600 + m_sommets.find(SomArete[j]->getSommet2())->second->get_x() + 600)/2 + 5, (m_sommets.find(SomArete[j]->getSommet1())->second->get_y() + m_sommets.find(SomArete[j]->getSommet2())->second->get_y())/2 - 10, SomArete[j]->getPoids(poids));
+        svgout.addText((m_sommets.find(SomArete[j]->getSommet1())->second->get_x() + 500 + m_sommets.find(SomArete[j]->getSommet2())->second->get_x() + 500)/2 + 5, (m_sommets.find(SomArete[j]->getSommet1())->second->get_y() + m_sommets.find(SomArete[j]->getSommet2())->second->get_y())/2 - 10, SomArete[j]->getPoids(poids));
         // svgout.addText(((m_sommets.find(SomArete[j]->getSommet1())->second->get_x() + 600 + m_sommets.find(SomArete[j]->getSommet2())->second->get_x() + 600))/2 +5,(((m_sommets.find(SomArete[j]->getSommet1())->second->get_y() + m_sommets.find(SomArete[j]->getSommet2())->second->get_y()))/2 -15, SomArete[j]->getIdArr(),"green"))
     }
 }
@@ -186,7 +186,7 @@ void graphe::afficher() const
 }
 
 
-void graphe::dessiner_graphe(Svgfile& svgout)
+void graphe::dessiner_graphe(double poids, Svgfile& svgout) 
 {
     for(auto& it : m_sommets)
     {
@@ -208,7 +208,8 @@ void graphe::dessiner_graphe(Svgfile& svgout)
         //double poids2 = it.second -> get_p2();
         
         svgout.addLine(x1, y1, x2, y2, "red");
-        //svgout.addText(x1, y1,x2,y2,)
+        svgout.addText((x1+x2)/2 + 5,(y1+y2)/2 + 10,it.second->getPoids(poids));
+       
         
     }
 }
@@ -219,9 +220,6 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
 {
     std::vector<std::vector<bool>> test;
     std::vector<bool> test2;
-    
-    
-    
     //
     /*
      std::vector<int> possibilite;

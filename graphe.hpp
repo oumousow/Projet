@@ -32,7 +32,7 @@ public:
     ~graphe();
     void prim(double poids, Svgfile& svgout)const;
     void afficher() const;
-    void dessiner_graphe(Svgfile& svgout);
+    void dessiner_graphe(double poids,Svgfile& svgout);
     void remplir_vector();
     std::vector<std::vector<bool>>Stock_solutions(std::vector<bool> vb);
     

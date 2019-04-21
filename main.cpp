@@ -71,7 +71,6 @@ void appelerMenu(graphe g, Svgfile& svgout)
             switch (choisir) {
                 case 1:
                     g.afficher();
-                    g.dessiner_graphe(svgout);
                     appelerMenu(g, svgout);
                     break;
                 case 2:
@@ -101,11 +100,15 @@ void choixPoids(graphe g, Svgfile& svgout)
         switch (choisir) {
             case 1:
                 g.prim(1, svgout);
+                g.dessiner_graphe(1,svgout);
+
                 appelerMenu(g, svgout);
                 
                 break;
             case 2:
                 g.prim(2, svgout);
+                g.dessiner_graphe(2,svgout);
+
                 appelerMenu(g, svgout);
                 break;
                 
@@ -123,7 +126,7 @@ int main(int argc, const char * argv[]) {
     Svgfile svgout;
     graphe g{"broadway.txt","broadway_weights_0.txt"};
     //g.afficher();
-    g.dessiner_graphe(svgout);
+    //g.dessiner_graphe(svgout);
     //g.remplir_vector();
     //g.prim(1, svgout);
     appelerMenu(g, svgout);
