@@ -13,20 +13,21 @@
 #include "svg.hpp"
 
 void choixPoids(graphe g, Svgfile& svgout);
-//graphe g{"broadway.txt","broadway_weights_0.txt"};
+
 
 
 void menu()
 {
     std::cout<<std::endl;
-    std::cout<<"1: Afficher les graphes"<<std::endl;
-    std::cout<<"2: Afficher le graphe prim"<<std::endl;
-    std::cout<<"3: Afficher les solutions"<<std::endl;
+    std::cout<<"1: Afficher les fichiers"<<std::endl;
+    std::cout<<"2: Afficher le graphe et la solution de prim"<<std::endl;
+    std::cout<<"3: Afficher les solutions binéaires"<<std::endl;
     std::cout<<"4: Quitter"<<std::endl;
     std::cout<<std::endl;
     std::cout<<std::endl;
 }
 
+//Pouvoir saisir le choix
 int faireChoix()
 {
     int choisir;
@@ -37,17 +38,17 @@ int faireChoix()
         std::cin>>choisir;
         std::cout<<std::endl;
     }
-    while(choisir <0 || choisir >5);
+    while(choisir <0 || choisir >5); // La condition de sortie du code
     return choisir;
 }
 
-
+// condition d'arrêt du code
 void quittercode()
 {
-    std::cout<<"vous avez quitter le code"<<std::endl;
+    std::cout<<"vous quittez le code"<<std::endl;
 }
 
-
+// faire le chois des pooids
 void menuPoids()
 {
     std::cout<<std::endl;
@@ -85,10 +86,12 @@ void appelerMenu(graphe g, Svgfile& svgout)
                     break;
             }
     }
-    while (choisir <0 || choisir >5) ;
+    while (choisir <0 || choisir >5) ; // La condition de sortie du code
     
 }
 
+
+// Code pour pouvoir choisir le graphe à afficher en fonction du poids choisi
 void choixPoids(graphe g, Svgfile& svgout)
 {
     int choisir=0;
@@ -116,7 +119,7 @@ void choixPoids(graphe g, Svgfile& svgout)
                 appelerMenu(g, svgout);
         }
     }
-    while (choisir <0 || choisir >5);
+    while (choisir <0 || choisir >5); // La condition de sortie du code 
     }
 
 
@@ -124,11 +127,7 @@ void choixPoids(graphe g, Svgfile& svgout)
 
 int main(int argc, const char * argv[]) {
     Svgfile svgout;
-    graphe g{"broadway.txt","broadway_weights_0.txt"};
-    //g.afficher();
-    //g.dessiner_graphe(svgout);
-    //g.remplir_vector();
-    //g.prim(1, svgout);
+    graphe g{"manhattan.txt","manhattan_weights_0.txt"};
     appelerMenu(g, svgout);
     return 0;
 }

@@ -140,11 +140,12 @@ void graphe::prim(double poids, Svgfile& svgout)const{
     // On affiche toutes les arêtes marquées
     for (int j=0; j<SomArete.size(); j++)
     {
-        //std::cout <<"Id arete conservee:"<< SomArete[j]->getIdArr() << std::endl;
+        
+        // On affiche les chemins de prim
         std::cout<<"\n"<<SomArete[j]->getSommet1()<<" -------> "<<SomArete[j]->getSommet2()<<std::endl;
         
         
-        
+        // Les fonctions svg pour afficher les graphes de prim avec les sommets et  choix des poids
         svgout.addDisk(m_sommets.find(SomArete[j]->getSommet1())->second->get_x()+500,m_sommets.find(SomArete[j]->getSommet1())->second->get_y(),5,"black");
         svgout.addText(m_sommets.find(SomArete[j]->getSommet1())->second->get_x()+515, m_sommets.find(SomArete[j]->getSommet1())->second->get_y(),SomArete[j]->getSommet1(), "purple");
         svgout.addDisk(m_sommets.find(SomArete[j]->getSommet2())->second->get_x()+500,m_sommets.find(SomArete[j]->getSommet2())->second->get_y(),5,"black");
@@ -156,7 +157,8 @@ void graphe::prim(double poids, Svgfile& svgout)const{
         // svgout.addText(((m_sommets.find(SomArete[j]->getSommet1())->second->get_x() + 600 + m_sommets.find(SomArete[j]->getSommet2())->second->get_x() + 600))/2 +5,(((m_sommets.find(SomArete[j]->getSommet1())->second->get_y() + m_sommets.find(SomArete[j]->getSommet2())->second->get_y()))/2 -15, SomArete[j]->getIdArr(),"green"))
     }
 }
-                           
+
+// Fonction qui permet d'afficher les arrêtes avec les coordonnées de sommets et leurs poids
 void graphe::afficher() const
 {
     std::cout<<"GRAPHE : "<<std::endl<<std::endl;
@@ -167,7 +169,6 @@ void graphe::afficher() const
     {
         std::cout<<"  sommet : "<<std::endl;
         it.second->afficherData();
-        /// it.second->afficherVoisins();
         std::cout<<std::endl<<std::endl;
     }
     
@@ -177,7 +178,6 @@ void graphe::afficher() const
     {
         std::cout<<"  arete : "<<std::endl;
         it.second->afficherData();
-        /// it.second->afficherVoisins();
         std::cout<<std::endl<<std::endl;
     }
     
@@ -186,6 +186,7 @@ void graphe::afficher() const
 }
 
 
+// Fonction qui permet d'afficher le graphe des différents fichiers.
 void graphe::dessiner_graphe(double poids, Svgfile& svgout) 
 {
     for(auto& it : m_sommets)
@@ -201,11 +202,12 @@ void graphe::dessiner_graphe(double poids, Svgfile& svgout)
         
         double x1 = m_sommets.find(id1)->second->get_x();
         double y1 = m_sommets.find(id1)->second->get_y();
-        //double poids1 = it.second -> get_p1();
+        svgout.addText(x1+5, y1+10, it.second->getSommet1());
         
         double x2 = m_sommets.find(id2)->second->get_x();
         double y2 = m_sommets.find(id2)->second->get_y();
-        //double poids2 = it.second -> get_p2();
+        svgout.addText(x2+5, y2+10, it.second->getSommet2());
+
         
         svgout.addLine(x1, y1, x2, y2, "red");
         svgout.addText((x1+x2)/2 + 5,(y1+y2)/2 + 10,it.second->getPoids(poids));
@@ -215,42 +217,11 @@ void graphe::dessiner_graphe(double poids, Svgfile& svgout)
 }
 
 
-
+// Fonctions pour afficher les différentes solutions binéaires possibles des graphes
 std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
 {
     std::vector<std::vector<bool>> test;
     std::vector<bool> test2;
-    //
-    /*
-     std::vector<int> possibilite;
-     std::vector<std::vector<int>>vecdec;
-     std::vector<std::vector<int>>admi;
-     
-     int nb_aretes=m_arete.size();
-     int nb_sommets=m_sommets.size();
-     int diff=nb_aretes-nb_sommets+1;
-     
-     for(int i=0; i<nb_sommets-1; i++)
-     {
-     possibilite.push_back(1);
-     }
-     
-     for(int i=0; i<diff; i++)
-     {
-     possibilite.push_back(0);
-     }
-     
-     std::sort(possibilite.begin(), possibilite.end());
-     do
-     {
-     admi.push_back(possibilite);
-     
-     }
-     while(std::next_permutation(possibilite.begin()),possibilite.end());
-     */
-     
-    
-    //
     
     std::sort(vb.begin(), vb.end());
     do
@@ -261,20 +232,7 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
     while(std::next_permutation(vb.begin(),vb.end()));
     
     
-    
-    //
-     /*
-     for(size_t i=0; i< m_arete.size(); i++)
-     {
-     for(size_t j=0; j< m_sommets.size(); j++)
-     {
-     std::swap (vb[j], vb[j+1]);
-     
-     }
-     test.push_back(vb);
-     }
-    */
-    
+
      
      
     for(size_t i=0; i< test.size(); i++)
@@ -296,8 +254,6 @@ std::vector<std::vector<bool>> graphe::Stock_solutions(std::vector<bool> vb)
 
 void graphe::remplir_vector()
 {
-    //size_t taille = m_arete.size();
-    //int nb_combinaisons = pow(2,taille);
     std::vector<bool> combi_arete (m_sommets.size()-1, 1);
     
     for(size_t i = 0; i < m_arete.size()-m_sommets.size()+1; ++i)
